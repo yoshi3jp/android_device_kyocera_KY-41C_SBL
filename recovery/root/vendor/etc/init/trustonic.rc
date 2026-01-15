@@ -1,3 +1,6 @@
+on init
+	start mobicore
+
 # Start Daemon (Registry directories should already be present)
 service mobicore /vendor/bin/mcDriverDaemon --P1 /mnt/vendor/persist/mcRegistry \
 	-r /vendor/app/mcRegistry/020f0000000000000000000000000000.drbin \

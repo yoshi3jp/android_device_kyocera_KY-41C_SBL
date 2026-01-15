@@ -12,10 +12,12 @@ service mobicore /vendor/bin/mcDriverDaemon --P1 /mnt/vendor/persist/mcRegistry 
 	-r /vendor/app/mcRegistry/06090000000000000000000000000000.drbin \
 	-r /vendor/app/mcRegistry/0f5eed3c3b5a47afacca69a84bf0efad.drbin \
 	-r /vendor/app/mcRegistry/9073f03a9618383bb1856eb3f990babd.drbin
-    user system
-    group system
+    user root
+    group root
+	setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
     class core
     priority -20
+	seclabel u:r:recovery:s0
 
 # t-Drv naming
 # 020f0000000000000000000000000000.drbin : utils

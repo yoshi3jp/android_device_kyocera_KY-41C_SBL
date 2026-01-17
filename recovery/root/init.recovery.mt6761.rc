@@ -1,6 +1,11 @@
 on init
     setprop sys.usb.configfs 1
     setprop sys.usb.ffs.aio_compat 1
+<<<<<<< HEAD
+=======
+    export MC_AUTH_TOKEN_PATH /mnt/vendor/persist
+    start health-hal-2-0
+>>>>>>> 8ba89d2 (Start health hal on init)
 
 on fs && property:ro.debuggable=0
     # distinguish USB shoulde connect or not, i.e. CDP vs SDP

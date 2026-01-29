@@ -1,11 +1,22 @@
 on early-init
     setprop ro.hardware.keystore_deprecated=true
-#    setprop ro.hardware.keystore2=none
+    mkdir /vendor 0755 root root
+    mkdir /vendor/persist 0771 system system
     mkdir /mnt/vendor
     mkdir /mnt/vendor/persist 0771 system system
     mkdir /metadata 0771 system system
     mkdir /sys/kernel/debug 0771 system system
     mount debugfs debugfs /sys/kernel/debug
+
+    # Wait until device-mapper nodes are ready (dynamic partitions)
+    wait /dev/block/dm-3 10
+    mount ext4 /dev/block/dm-3 /vendor
+    # If anything expects vendor under /mnt/vendor, mirror it.
+    mount none /vendor /mnt/vendor bind
+    # ────────────────────────────────────────────────────────────────
+    # Mount /metadata from mmcblk0p10 (ext4)
+    # ────────────────────────────────────────────────────────────────
+    mount ext4 /dev/block/mmcblk0p10 /metadata
     
 on init
     start health-hal-2-0
@@ -26,7 +37,3 @@ on post-fs
     symlink /dev/block/mmcblk0boot1 /dev/block/platform/bootdevice/by-name/preloader_b
     symlink /dev/block/mmcblk0boot0 /dev/block/by-name/preloader_a
     symlink /dev/block/mmcblk0boot1 /dev/block/by-name/preloader_b
-    # ────────────────────────────────────────────────────────────────
-    # Mount /metadata from mmcblk0p10 (ext4)
-    # ────────────────────────────────────────────────────────────────
-    mount ext4 /dev/block/mmcblk0p10 /metadata

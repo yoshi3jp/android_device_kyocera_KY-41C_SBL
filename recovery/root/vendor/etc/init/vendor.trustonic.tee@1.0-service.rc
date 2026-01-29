@@ -1,5 +1,5 @@
 on init
-    start tee-1-8
+    start tee-1-0
 
 service tee-1-0 /vendor/bin/hw/vendor.trustonic.tee@1.0-service
     class hal

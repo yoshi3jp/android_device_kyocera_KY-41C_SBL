@@ -29,4 +29,4 @@ on post-fs
     # ────────────────────────────────────────────────────────────────
     # Mount /metadata from mmcblk0p10 (ext4)
     # ────────────────────────────────────────────────────────────────
-    mount ext4 /dev/block/mmcblk0p10 /metadata nosuid,nodev
+    mount ext4 /dev/block/mmcblk0p10 /metadata

@@ -10,7 +10,7 @@ on early-init
 
     # Wait until device-mapper nodes are ready (dynamic partitions)
     wait /dev/block/dm-3 10
-    mount ext4 /dev/block/dm-3 /vendor
+    mount ext4 /dev/block/dm-3 /vendor ro barrier=1,discard
     # If anything expects vendor under /mnt/vendor, mirror it.
     mount none /vendor /mnt/vendor bind
     # ────────────────────────────────────────────────────────────────
